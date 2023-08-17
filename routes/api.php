@@ -24,11 +24,21 @@ Route::get('/category',[RoomController::class,'getCategoryRoom']);
 
 Route::get('/rooms',[RoomController::class ,'getRoom']);
 
-Route::get('/callroomservice',[RoomController::class ,'getcallRoomService']);
+// Route::get('/callroomservice',[RoomController::class ,'getcallRoomService']);
+// Route::get('/callkitchen',[RoomController::class ,'getketchenRoomService']);
 
-Route::get('/callkitchen',[RoomController::class ,'getketchenRoomService']);
+
 
 Route::get('/room/{id_rooms}',[RoomController::class ,'getRoomDetail']);
 
 Route::get('/similar-rooms/{id_room}', [RoomController::class, 'getSimilarRooms']);
 Route::get('/type-rooms/{id_categori_room}', [RoomController::class, 'getTypeRooms']);
+
+
+//Food
+Route::get('/foods',[FoodController::class, 'getFood']);
+Route::get('category',[FoodController::class ,'getCategoryFood']);
+
+Route::get('/food/{id_foods}',[FoodController::class ,'getFoodDetail']);
+Route::get('/similar-foods/{id_foods}',[FoodController::class , 'getSimilarFoods']);
+Route::get('/type-foods/{id_categori_foods}', [FoodController::class, 'getTypeFoods']);

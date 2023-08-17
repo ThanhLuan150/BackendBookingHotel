@@ -22,15 +22,15 @@ class RoomController extends Controller
     }
 
     
-    public function getcallRoomService(){
-        $callRoomService = call_room_services::all();
-        return response()->json($callRoomService);
-    }
+    // public function getcallRoomService(){
+    //     $callRoomService = call_room_services::all();
+    //     return response()->json($callRoomService);
+    // }
 
-    public function getketchenRoomService(){
-        $callKitchenRoomService = kitchen_room_services::all();
-        return response()->json( $callKitchenRoomService);
-    }
+    // public function getketchenRoomService(){
+    //     $callKitchenRoomService = kitchen_room_services::all();
+    //     return response()->json( $callKitchenRoomService);
+    // }
 
 
 
