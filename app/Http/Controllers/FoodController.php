@@ -17,15 +17,15 @@ class FoodController extends Controller
         return response()-> json(  $categoryfoods  );
     }
 
-    public function getFoodDetail($CategoryID)
+    public function getFoodDetail($FoodID)
     {
-        $foodsInCategory = DB::table('foods')
+        $foodDetail = DB::table('foods')
             ->join('category_foods', 'foods.id_categori_foods', '=', 'category_foods.id_categori_foods')
             ->select('category_foods.*', 'foods.*')
-            ->where('category_foods.id_categori_foods', '=', $CategoryID)
+            ->where('foods.id_foods', '=', $FoodID)
             ->get();
     
-        return response()->json(['foodsInCategory' =>$foodsInCategory], 200);
+        return response()->json(['foodDetail' =>  $foodDetail], 200);
     }
     public function getSimilarFoods($FoodID){
         // Lấy thông tin id_categori_room của phòng hiện tại
@@ -53,5 +53,12 @@ class FoodController extends Controller
     
         return response()->json(['type_foods' => $TypeFoods], 200);
     }
+    public function getListFoods() {
+        $ListFoods = DB::table('foods')
+            ->join('category_foods', 'foods.id_categori_foods', '=', 'category_foods.id_categori_foods')
+            ->select('category_foods.*', 'foods.*')
+            ->get();
     
+        return response()->json(['list_foods' => $ListFoods], 200);
+    }
 }
