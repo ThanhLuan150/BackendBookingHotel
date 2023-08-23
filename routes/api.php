@@ -47,3 +47,6 @@ Route::get('/list-foods',[FoodController::class,'getListFoods']);
 
 //user
 Route::get('/users',[AccountController::class ,'getUser']);
+Route::post('/Register',[AccountController::class,'CreatAcount']);
+
+Route::get('/checkmail',[AccountController::class,'checkEmail']);

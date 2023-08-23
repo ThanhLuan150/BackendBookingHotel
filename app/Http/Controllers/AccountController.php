@@ -34,9 +34,8 @@ class AccountController extends Controller
     $account = new usersses();
     $account->lastname = $request->input('lastname');
     $account->firstname = $request->input('firstname');
-    $account->firstname = $request->input('firstname');
-    $account->firstname = $request->input('firstname');
-    $account->firstname = $request->input('firstname');
+    $account->email = $request->input('email');
+    $account->phone = $request->input('phone');
     $account->password = Hash::make($request->input('password'));
     $account->save();
 
@@ -52,56 +51,56 @@ class AccountController extends Controller
  * @param  \Illuminate\Http\Request  $request
  * @return \Illuminate\Http\JsonResponse
  */
-public function login(Request $request)
-{
-    $email = $request->input('email');
-    $password = $request->input('password');
+// public function login(Request $request)
+// {
+//     $email = $request->input('email');
+//     $password = $request->input('password');
 
-    $account = Account::where('email', $email)->first();
+//     $account = usersses::where('email', $email)->first();
     
-    if (!$account || !Hash::check($password, $account->password)) {
-        return response()->json([
-            'message' => 'Invalid email or password',
-        ], 401);
-    }
-    $token = $account->createToken('API Token')->plainTextToken;
+//     if (!$account || !Hash::check($password, $account->password)) {
+//         return response()->json([
+//             'message' => 'Invalid email or password',
+//         ], 401);
+//     }
+//     $token = $account->createToken('API Token')->plainTextToken;
     
-    // Get the associated User model
-    $user = $account->user;
+//     // Get the associated User model
+//     $user = $account->user;
     
-    // Access the user's properties, e.g., user ID
-    $user_id = $user->id;
-    if($account->role){
-        return response()->json([
-            'message' => 'Login admin successfully',
-            'token' => $token,
-            'user_id' => $user_id,
-            'role'=>1
-        ]);
-    }
+//     // Access the user's properties, e.g., user ID
+//     $user_id = $user->id;
+//     if($account->role){
+//         return response()->json([
+//             'message' => 'Login admin successfully',
+//             'token' => $token,
+//             'user_id' => $user_id,
+//             'role'=>1
+//         ]);
+//     }
 
-    return response()->json([
-        'message' => 'Login successfully',
-        'token' => $token,
-        'user_id' => $user_id,
-        'role'=>0
-    ]);
-}
-/**
- * Đăng xuất.
- *
- * @param  \Illuminate\Http\Request  $request
- * @return \Illuminate\Http\JsonResponse
- */
-public function Logout(Request $request)
-{
-    $account = $request->user();
-    $account->tokens()->delete();
+//     return response()->json([
+//         'message' => 'Login successfully',
+//         'token' => $token,
+//         'user_id' => $user_id,
+//         'role'=>0
+//     ]);
+// }
+// /**
+//  * Đăng xuất.
+//  *
+//  * @param  \Illuminate\Http\Request  $request
+//  * @return \Illuminate\Http\JsonResponse
+//  */
+// public function Logout(Request $request)
+// {
+//     $account = $request->user();
+//     $account->tokens()->delete();
 
-    return response()->json([
-        'message' => 'Logged out successfully',
-    ]);
-}
+//     return response()->json([
+//         'message' => 'Logged out successfully',
+//     ]);
+// }
 
     /**
      * Hiển thị thông tin của tài khoản dựa trên email.
@@ -111,7 +110,7 @@ public function Logout(Request $request)
      */
     public function show($email)
     {
-        $account = Account::where('email', $email)->first();
+        $account = usersses::where('email', $email)->first();
 
         if (!$account) {
             return response()->json([
@@ -120,7 +119,7 @@ public function Logout(Request $request)
         }
 
         return response()->json([
-            'id' => $account->id,
+            'id_users' => $account->id_users,
             'email' => $account->email,
         ]);
     }
@@ -128,7 +127,7 @@ public function Logout(Request $request)
     {
         $email = $request->input('email');
     
-        $account = Account::where('email', $email)->first();
+        $account = usersses::where('email', $email)->first();
     
         return response()->json([
             'exists' => $account ? true : false,
