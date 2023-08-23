@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
@@ -31,9 +32,9 @@ Route::get('/rooms',[RoomController::class ,'getRoom']);
 
 Route::get('/room/{id_rooms}',[RoomController::class ,'getRoomDetail']);
 
-Route::get('/similar-rooms/{id_room}', [RoomController::class, 'getSimilarRooms']);
+Route::get('/similar-rooms/{id_rooms}', [RoomController::class, 'getSimilarRooms']);
 Route::get('/type-rooms/{id_categori_room}', [RoomController::class, 'getTypeRooms']);
-
+Route::get('/list-rooms', [RoomController::class, 'getListRooms']);
 
 //Food
 Route::get('/foods',[FoodController::class, 'getFood']);
@@ -42,3 +43,7 @@ Route::get('category',[FoodController::class ,'getCategoryFood']);
 Route::get('/food/{id_foods}',[FoodController::class ,'getFoodDetail']);
 Route::get('/similar-foods/{id_foods}',[FoodController::class , 'getSimilarFoods']);
 Route::get('/type-foods/{id_categori_foods}', [FoodController::class, 'getTypeFoods']);
+Route::get('/list-foods',[FoodController::class,'getListFoods']);
+
+//user
+Route::get('/users',[AccountController::class ,'getUser']);
