@@ -126,7 +126,6 @@ class AccountController extends Controller
     public function checkEmail(Request $request)
     {
         $email = $request->input('email');
-    
         $account = usersses::where('email', $email)->first();
     
         return response()->json([
@@ -136,5 +135,3 @@ class AccountController extends Controller
     
 
 }
-// http_proxy
-// php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
