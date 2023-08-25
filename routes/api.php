@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\VerificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -50,3 +51,5 @@ Route::get('/users',[AccountController::class ,'getUser']);
 Route::post('/Register',[AccountController::class,'CreatAcount']);
 
 Route::get('/checkmail',[AccountController::class,'checkEmail']);
+
+Route::post('verify',[\App\Http\Controllers\VerificationController::class,'verifyOtp']);
