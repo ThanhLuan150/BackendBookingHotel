@@ -9,15 +9,19 @@ class usersses extends Model
 {
     use HasFactory;
     use HasApiTokens;
+    protected $table='usersses';
+
 
     protected $fillable = ['lastname','firstname','email','phone', 'password', 'role', 'verify'];
-
-    public function authenticate($password)
+    public function account()
     {
-        return Hash::check($password, $this->password);
+        return $this->belongsTo(App\Models\usersses::class);
     }
     public function tokens()
-    {
-        return $this->hasMany(PersonalAccessToken::class, 'tokenable_id');
-    }
+{
+    return $this->hasMany(PersonalAccessToken::class, 'tokenable_id');
+}
+
+    
+    
 }
