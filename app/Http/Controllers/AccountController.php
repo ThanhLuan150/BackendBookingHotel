@@ -55,23 +55,21 @@ public function login(Request $request)
     $password = $request->input('password');
 
     $account = usersses::where('email', $email)->first();
-
+    
     if (!$account || !Hash::check($password, $account->password)) {
         return response()->json([
             'message' => 'Invalid email or password',
         ], 401);
     }
-    
-    // Tạo access token và gán người sở hữu là $account (usersses)
     $token = $account->createToken('API Token')->plainTextToken;
     
-    $id_users = $account->id_users;
+    $user_id = $account->id_users;
     
     if ($account->role) {
         return response()->json([
             'message' => 'Login admin successfully',
             'token' => $token,
-            'id_users' => $id_users,
+            'user_id' => $user_id,
             'role' => 1
         ]);
     }
@@ -79,7 +77,7 @@ public function login(Request $request)
     return response()->json([
         'message' => 'Login successfully',
         'token' => $token,
-        'id_users' => $id_users,
+        'user_id' => $user_id,
         'role' => 0
     ]);
 }
