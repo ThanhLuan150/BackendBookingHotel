@@ -52,4 +52,5 @@ Route::post('/Register',[AccountController::class,'CreatAcount']);
 
 Route::get('/checkmail',[AccountController::class,'checkEmail']);
 
-Route::post('verify',[\App\Http\Controllers\VerificationController::class,'verifyOtp']);
+Route::post('/verify',[VerificationController::class,'verifyOtp']);
+Route::post('/Login',[AccountController::class,'login']);

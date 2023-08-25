@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-// use App\Models\Account;
-use App\Models\Account;
 
 use App\Models\usersses;
 use Illuminate\Http\Request;
@@ -51,56 +49,56 @@ class AccountController extends Controller
  * @param  \Illuminate\Http\Request  $request
  * @return \Illuminate\Http\JsonResponse
  */
-// public function login(Request $request)
-// {
-//     $email = $request->input('email');
-//     $password = $request->input('password');
+public function login(Request $request)
+{
+    $email = $request->input('email');
+    $password = $request->input('password');
 
-//     $account = usersses::where('email', $email)->first();
-    
-//     if (!$account || !Hash::check($password, $account->password)) {
-//         return response()->json([
-//             'message' => 'Invalid email or password',
-//         ], 401);
-//     }
-//     $token = $account->createToken('API Token')->plainTextToken;
-    
-//     // Get the associated User model
-//     $user = $account->user;
-    
-//     // Access the user's properties, e.g., user ID
-//     $user_id = $user->id;
-//     if($account->role){
-//         return response()->json([
-//             'message' => 'Login admin successfully',
-//             'token' => $token,
-//             'user_id' => $user_id,
-//             'role'=>1
-//         ]);
-//     }
+    $account = usersses::where('email', $email)->first();
 
-//     return response()->json([
-//         'message' => 'Login successfully',
-//         'token' => $token,
-//         'user_id' => $user_id,
-//         'role'=>0
-//     ]);
-// }
-// /**
-//  * Đăng xuất.
-//  *
-//  * @param  \Illuminate\Http\Request  $request
-//  * @return \Illuminate\Http\JsonResponse
-//  */
-// public function Logout(Request $request)
-// {
-//     $account = $request->user();
-//     $account->tokens()->delete();
+    if (!$account || !Hash::check($password, $account->password)) {
+        return response()->json([
+            'message' => 'Invalid email or password',
+        ], 401);
+    }
+    
+    // Tạo access token và gán người sở hữu là $account (usersses)
+    $token = $account->createToken('API Token')->plainTextToken;
+    
+    $id_users = $account->id_users;
+    
+    if ($account->role) {
+        return response()->json([
+            'message' => 'Login admin successfully',
+            'token' => $token,
+            'id_users' => $id_users,
+            'role' => 1
+        ]);
+    }
 
-//     return response()->json([
-//         'message' => 'Logged out successfully',
-//     ]);
-// }
+    return response()->json([
+        'message' => 'Login successfully',
+        'token' => $token,
+        'id_users' => $id_users,
+        'role' => 0
+    ]);
+}
+
+/**
+ * Đăng xuất.
+ *
+ * @param  \Illuminate\Http\Request  $request
+ * @return \Illuminate\Http\JsonResponse
+ */
+public function Logout(Request $request)
+{
+    $account = $request->user();
+    $account->tokens()->delete();
+
+    return response()->json([
+        'message' => 'Logged out successfully',
+    ]);
+}
 
     /**
      * Hiển thị thông tin của tài khoản dựa trên email.
